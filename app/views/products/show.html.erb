@@ -1,2 +1,25 @@
 <h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<p>
+  <strong>Product name:</strong>
+  <%= @product.product_name %>
+
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= number_to_currency(@product.price) %>
+</p>
+
+<p>
+  <strong>Thumburl:</strong>
+  <%= image_tag @product.thumburl, :class=>"images_thumb" %>
+</p>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>
+
