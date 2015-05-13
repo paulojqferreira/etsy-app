@@ -1,5 +1,8 @@
 <h1>Products#index</h1>
 
+<% product = Product.find(1) %>
+<h1><%= product.product_name %></h1>
+
 <%= link_to 'New Product', new_product_path %>
 
 <% @products.in_groups_of(4).each do |products| %>

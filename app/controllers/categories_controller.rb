@@ -1,10 +1,21 @@
 class CategoriesController < ApplicationController
+  
+  before_action :get_category, only: [:edit, :updade, :destroy, :show]
+
+  def get_category
+     @category = Category.find(params[:id]) 
+  end
+  
+
   def index
-   @categories = Category.all
+    if params[:name]
+    @categories = Category.where(name: params[:name]).first
+    else
+    @categories = Category.all
+   end
   end
 
   def show
-  @category = Category.find(params[:id])
   @products = @category.products
   end
 
@@ -22,11 +33,11 @@ class CategoriesController < ApplicationController
   end
 
     def edit
-   @category = Category.find(params[:id])
+
   end
   
   def update
-   @category = Category.find(params[:id])
+  
    if @category.update_attributes(category_params)
      redirect_to(:action => 'show', :id => @category.id)
    else
@@ -35,12 +46,12 @@ class CategoriesController < ApplicationController
   end
 
   def delete
-    @category = Category.find(params[:id])
+   
   end
   
   def destroy
    #@category.find(params[:id]).destroy
-   @category = Category.find(params[:id])
+
    @category.destroy
    redirect_to(:action => 'index')
   end

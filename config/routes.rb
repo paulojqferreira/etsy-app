@@ -1,29 +1,26 @@
 Rails.application.routes.draw do
 
-  get 'products/index'
-  get 'products/show'
-  get 'products/new'
-  get 'products/edit'
-  #get 'products/delete'
-
-  get 'categories/index'
-  get 'categories/show'
-  get 'categories/new'
-  get 'categories/edit'
-  #get 'categories/delete'
-
-  get 'pages/home'
-  get 'pages/erb_demo'
-  get 'pages/render_demo'
-  get 'pages/redirect_demo'
   root 'pages#home'
-
-
+  #root to: "categories#index"
   resources :categories
   get 'categories/:id/delete' => 'categories#delete', :as => :categories_delete
 
   resources :products
   get 'products/:id/delete' => 'products#delete', :as => :products_delete
+  devise_for :users
+  
+  get '/all' => 'categories#index', as: 'all_categories'
+  #get '/all' => redirect('/categories') 
+  #get ':name' => 'categories#index', as: 'friendly_categories'
+
+  get 'pages/home'
+  get 'pages/erb_demo'
+  get 'pages/render_demo'
+  get 'pages/redirect_demo'
+ 
+
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
